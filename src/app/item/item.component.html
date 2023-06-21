@@ -1,0 +1,91 @@
+
+
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-6 col-md-4" style="background-color: rgb(246, 246, 246);">
+      <h2>Músicas</h2>
+  <!-- Formulario para crear/editar un item -->
+      <!-- habilitamos la validación de Bootstrap.html class="was-validated"> -->
+      <form (ngSubmit)="currentItem._id ? updateItem(currentItem._id, currentItem) : createItem(currentItem)" class="was-validated">
+        <div class="form-group">
+          <label for="name">Nombre:</label>
+          <!-- class="form-control"-->
+          <input type="text" class="form-control" [(ngModel)]="currentItem.name" name="name" required>
+          <div class="invalid-feedback">
+            Nombre es obligatorio.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Descripción:</label>
+          <input type="text" class="form-control" [(ngModel)]="currentItem.description" name="description" required>
+          <div class="invalid-feedback">
+            Descripcion es obligatorio.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="artist">Artista o Banda:</label>
+          <input type="text" class="form-control" [(ngModel)]="currentItem.artist" name="artist" required >
+          <div class="invalid-feedback">
+            Artista es obligatorio.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="genre">Género:</label>
+          <input type="text" class="form-control" [(ngModel)]="currentItem.genre" name="genre" required>
+          <div class="invalid-feedback">
+            Género es obligatorio.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="duration">Duración:</label>
+          <input type="text" class="form-control" [(ngModel)]="currentItem.duration" name="duration" required>
+          <div class="invalid-feedback">
+            Duración es obligatorio.
+          </div>
+        </div>
+        <br>
+       
+        <button type="submit" class="btn btn-primary btn-lg btn-block">{{currentItem._id ? 'Update' : 'Add'}}</button>
+      </form>
+
+    </div>
+
+    <div class="col-md-8" style="background-color: rgb(226, 226, 226);">
+      <h2>Lista de Músicas</h2>
+
+      <!-- Lista de items -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Artista o Banda</th>
+            <th>Género</th>
+            <th>Duración</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.artist }}</td>
+            <td>{{ item.genre }}</td>
+            <td>{{ item.duration }}</td>
+            <td>
+              <button class="btn btn-sm btn-primary" (click)="editItem(item._id)">Edit</button>
+              
+              <button class="btn btn-sm btn-danger" (click)="confirmDeleteItem(item._id)">Delete</button>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
